@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+<div class="page-header">
+  <div>
+    <h2><i class="fas fa-user-injured"></i> Patients</h2>
+    <p class="subtitle"><%= patients.length %> patient(s) registered</p>
+  </div>
+  <a href="/patients/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Patient</a>
+</div>
+
+<%- include('../partials/alerts') %>
+
+<% if (patients.length === 0) { %>
+  <div class="empty-state">
+    <i class="fas fa-user-injured"></i>
+    <h3>No patients yet</h3>
+    <p>Add your first patient to get started.</p>
+    <a href="/patients/new" class="btn btn-primary">Add Patient</a>
+  </div>
+<% } else { %>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% patients.forEach((p, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><strong><%= p.name %></strong></td>
+          <td><%= p.age %></td>
+          <td><span class="badge badge-<%= p.gender === 'male' ? 'blue' : p.gender === 'female' ? 'purple' : 'gray' %>"><%= p.gender %></span></td>
+          <td><%= p.contact %></td>
+          <td class="actions">
+            <a href="/patients/<%= p.id %>" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i></a>
+            <a href="/patients/<%= p.id %>/edit" class="btn btn-sm btn-yellow"><i class="fas fa-edit"></i></a>
+            <form action="/patients/<%= p.id %>/delete" method="POST" style="display:inline" onsubmit="return confirm('Delete this patient?')">
+              <button type="submit" class="btn btn-sm btn-red"><i class="fas fa-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+<%- include('../partials/footer') %>

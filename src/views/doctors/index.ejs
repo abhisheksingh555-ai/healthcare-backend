@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+<div class="page-header">
+  <div>
+    <h2><i class="fas fa-user-md"></i> Doctors</h2>
+    <p class="subtitle"><%= doctors.length %> doctor(s) registered</p>
+  </div>
+  <a href="/doctors/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Doctor</a>
+</div>
+
+<%- include('../partials/alerts') %>
+
+<% if (doctors.length === 0) { %>
+  <div class="empty-state">
+    <i class="fas fa-user-md"></i>
+    <h3>No doctors yet</h3>
+    <p>Add your first doctor to get started.</p>
+    <a href="/doctors/new" class="btn btn-primary">Add Doctor</a>
+  </div>
+<% } else { %>
+  <div class="cards-grid">
+    <% doctors.forEach(d => { %>
+    <div class="doctor-card">
+      <div class="doctor-avatar">
+        <i class="fas fa-user-md"></i>
+      </div>
+      <div class="doctor-info">
+        <h3>Dr. <%= d.name %></h3>
+        <p class="specialization"><i class="fas fa-stethoscope"></i> <%= d.specialization %></p>
+        <p><i class="fas fa-phone"></i> <%= d.contact %></p>
+        <p><i class="fas fa-envelope"></i> <%= d.email %></p>
+        <% if (d.experience_years) { %><p><i class="fas fa-briefcase"></i> <%= d.experience_years %> yrs experience</p><% } %>
+      </div>
+      <div class="doctor-actions">
+        <a href="/doctors/<%= d.id %>" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i> View</a>
+        <a href="/doctors/<%= d.id %>/edit" class="btn btn-sm btn-yellow"><i class="fas fa-edit"></i> Edit</a>
+        <form action="/doctors/<%= d.id %>/delete" method="POST" onsubmit="return confirm('Delete Dr. <%= d.name %>?')">
+          <button type="submit" class="btn btn-sm btn-red"><i class="fas fa-trash"></i></button>
+        </form>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+<% } %>
+<%- include('../partials/footer') %>

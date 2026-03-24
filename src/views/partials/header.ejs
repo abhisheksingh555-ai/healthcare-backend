@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | <%= appName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+<% if (user) { %>
+<nav class="navbar">
+  <div class="nav-brand">
+    <i class="fas fa-heartbeat"></i>
+    <span><%= appName %></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/dashboard" class="<%= title === 'Dashboard' ? 'active' : '' %>"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="/patients" class="<%= title === 'Patients' ? 'active' : '' %>"><i class="fas fa-user-injured"></i> Patients</a></li>
+    <li><a href="/doctors" class="<%= title === 'Doctors' ? 'active' : '' %>"><i class="fas fa-user-md"></i> Doctors</a></li>
+    <li><a href="/mappings" class="<%= title === 'Patient-Doctor Mappings' ? 'active' : '' %>"><i class="fas fa-link"></i> Mappings</a></li>
+  </ul>
+  <div class="nav-user">
+    <span><i class="fas fa-user-circle"></i> <%= user.name %></span>
+    <a href="/auth/logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</nav>
+<% } %>
+<main class="container">

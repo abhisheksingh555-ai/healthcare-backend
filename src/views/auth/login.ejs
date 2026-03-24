@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <i class="fas fa-heartbeat"></i>
+      <h1><%= appName %></h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <%- include('../partials/alerts') %>
+    <% if (typeof query !== 'undefined' && query && query.registered) { %>
+      <div class="alert alert-success"><i class="fas fa-check-circle"></i> Registration successful! Please log in.</div>
+    <% } %>
+
+    <form action="/auth/login" method="POST" class="auth-form">
+      <div class="form-group">
+        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="password"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">
+        <i class="fas fa-sign-in-alt"></i> Sign In
+      </button>
+    </form>
+
+    <p class="auth-switch">Don't have an account? <a href="/auth/register">Register here</a></p>
+  </div>
+</div>
+<%- include('../partials/footer') %>

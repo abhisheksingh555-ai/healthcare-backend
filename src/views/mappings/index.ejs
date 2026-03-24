@@ -1,0 +1,79 @@
+<%- include('../partials/header') %>
+<div class="page-header">
+  <div>
+    <h2><i class="fas fa-link"></i> Patient-Doctor Mappings</h2>
+    <p class="subtitle">Assign doctors to patients</p>
+  </div>
+</div>
+
+<%- include('../partials/alerts') %>
+
+<div class="mapping-layout">
+  <!-- Assign Form -->
+  <div class="form-card">
+    <h3><i class="fas fa-plus-circle"></i> New Assignment</h3>
+    <form action="/mappings" method="POST">
+      <div class="form-group">
+        <label for="patient_id">Select Patient *</label>
+        <select id="patient_id" name="patient_id" required>
+          <option value="">— Choose a patient —</option>
+          <% patients.forEach(p => { %>
+            <option value="<%= p.id %>"><%= p.name %> (Age: <%= p.age %>)</option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="doctor_id">Select Doctor *</label>
+        <select id="doctor_id" name="doctor_id" required>
+          <option value="">— Choose a doctor —</option>
+          <% doctors.forEach(d => { %>
+            <option value="<%= d.id %>">Dr. <%= d.name %> – <%= d.specialization %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="2" placeholder="Optional notes about this assignment..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">
+        <i class="fas fa-link"></i> Assign Doctor
+      </button>
+    </form>
+  </div>
+
+  <!-- Mappings List -->
+  <div>
+    <h3><i class="fas fa-list"></i> All Assignments (<%= mappings.length %>)</h3>
+    <% if (mappings.length === 0) { %>
+      <div class="empty-state">
+        <i class="fas fa-link"></i>
+        <h3>No assignments yet</h3>
+        <p>Use the form to assign a doctor to a patient.</p>
+      </div>
+    <% } else { %>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr><th>Patient</th><th>Doctor</th><th>Specialization</th><th>Notes</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <% mappings.forEach(m => { %>
+            <tr>
+              <td><a href="/patients/<%= m.patient.id %>"><i class="fas fa-user-injured"></i> <%= m.patient.name %></a></td>
+              <td><a href="/doctors/<%= m.doctor.id %>"><i class="fas fa-user-md"></i> Dr. <%= m.doctor.name %></a></td>
+              <td><%= m.doctor.specialization %></td>
+              <td class="text-muted"><%= m.notes || '—' %></td>
+              <td>
+                <form action="/mappings/<%= m.id %>/delete" method="POST" onsubmit="return confirm('Remove this assignment?')">
+                  <button type="submit" class="btn btn-sm btn-red"><i class="fas fa-unlink"></i></button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,82 @@
+<%- include('partials/header') %>
+<div class="page-header">
+  <div>
+    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+    <p class="subtitle">Welcome back, <strong><%= user.name %></strong>!</p>
+  </div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card stat-blue">
+    <div class="stat-icon"><i class="fas fa-user-injured"></i></div>
+    <div class="stat-info">
+      <h3><%= stats.patients %></h3>
+      <p>My Patients</p>
+    </div>
+    <a href="/patients" class="stat-link">View all <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="stat-card stat-green">
+    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+    <div class="stat-info">
+      <h3><%= stats.doctors %></h3>
+      <p>Doctors</p>
+    </div>
+    <a href="/doctors" class="stat-link">View all <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="stat-card stat-purple">
+    <div class="stat-icon"><i class="fas fa-link"></i></div>
+    <div class="stat-info">
+      <h3><%= stats.mappings %></h3>
+      <p>Assignments</p>
+    </div>
+    <a href="/mappings" class="stat-link">View all <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<div class="quick-actions">
+  <h3>Quick Actions</h3>
+  <div class="actions-grid">
+    <a href="/patients/new" class="action-card">
+      <i class="fas fa-user-plus"></i>
+      <span>Add Patient</span>
+    </a>
+    <a href="/doctors/new" class="action-card">
+      <i class="fas fa-stethoscope"></i>
+      <span>Add Doctor</span>
+    </a>
+    <a href="/mappings" class="action-card">
+      <i class="fas fa-clipboard-list"></i>
+      <span>Manage Assignments</span>
+    </a>
+  </div>
+</div>
+
+<div class="api-info">
+  <h3><i class="fas fa-code"></i> REST API Endpoints</h3>
+  <div class="api-table-wrapper">
+    <table class="table">
+      <thead>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="badge badge-green">POST</span></td><td>/api/auth/register</td><td>Register user</td><td>No</td></tr>
+        <tr><td><span class="badge badge-green">POST</span></td><td>/api/auth/login</td><td>Login &amp; get JWT</td><td>No</td></tr>
+        <tr><td><span class="badge badge-green">POST</span></td><td>/api/patients</td><td>Create patient</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/patients</td><td>List my patients</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/patients/:id</td><td>Get patient details</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-yellow">PUT</span></td><td>/api/patients/:id</td><td>Update patient</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td>/api/patients/:id</td><td>Delete patient</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-green">POST</span></td><td>/api/doctors</td><td>Create doctor</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/doctors</td><td>List all doctors</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/doctors/:id</td><td>Get doctor details</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-yellow">PUT</span></td><td>/api/doctors/:id</td><td>Update doctor</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td>/api/doctors/:id</td><td>Delete doctor</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-green">POST</span></td><td>/api/mappings</td><td>Assign doctor to patient</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/mappings</td><td>List all mappings</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-blue">GET</span></td><td>/api/mappings/:patient_id</td><td>Get patient's doctors</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td>/api/mappings/:id</td><td>Remove mapping</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include('partials/footer') %>
