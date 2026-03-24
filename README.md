@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏥 Healthcare Backend
 
 A full-stack healthcare management system built with **Node.js**, **Express**, **EJS**, **PostgreSQL**, and **JWT authentication** — mirroring the Django assignment spec exactly.
@@ -262,3 +263,6 @@ All API routes are prefixed with `/api`. Protected routes require `Authorization
 ## 📜 License
 
 MIT
+=======
+# healthcare-backend
+>>>>>>> f9ee72d0f0ce22e94593a4deed4008b55686696c
